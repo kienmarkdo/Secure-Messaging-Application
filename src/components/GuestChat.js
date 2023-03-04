@@ -39,6 +39,13 @@ export default function GuestChat() {
   }, []);
   return (
     <>
+      {
+        //guest chat header
+      <div style={{ backgroundColor: "white",textAlign: "center"}}>
+        <strong>Guest Chat Session</strong>
+    
+      </div>
+      }
       <div
         id="scrollableDiv"
         style={{
@@ -65,11 +72,11 @@ export default function GuestChat() {
           scrollableTarget="scrollableDiv"
         >
           <List
-            header={
+            /*header={
               <div style={{ backgroundColor: "white" }}>
                 <strong>Guest Chat Session</strong>
               </div>
-            }
+            }*/
             dataSource={data}
             renderItem={(item) => (
               <List.Item key={item.email}>
