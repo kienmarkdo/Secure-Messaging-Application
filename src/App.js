@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, Input } from "antd";
+import { Button, Input, Card } from "antd";
 import { useState } from "react";
 
 function App() {
@@ -13,7 +13,19 @@ function App() {
 
   return (
     <div>
-      <div className="generate-chat-container">
+      {/* <div className="main-container"></div> */}
+      {/* <Card title="Card Title">
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card.Grid hoverable={false} style={gridStyle}>
+          Content
+        </Card.Grid>
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card.Grid style={gridStyle}>Content</Card.Grid>
+      </Card> */}
+      {/* <div className="generate-chat-container">
         <div></div>
         <Button
           shape="round"
@@ -24,7 +36,7 @@ function App() {
         >
           Generate New Chat!
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
