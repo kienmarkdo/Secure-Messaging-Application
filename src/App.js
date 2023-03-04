@@ -1,6 +1,7 @@
 import "./App.css";
 import { Typography, Button, Input, Card, Row, Col } from "antd";
 import { useState } from "react";
+import OwnerChat from "./components/OwnerChat";
 
 function App() {
   const [loadingStatus, setLoadingStatus] = useState(false);
@@ -30,7 +31,7 @@ function App() {
               style={{ height: "30vh" }}
               bordered={false}
             >
-              asdasdads
+              <OwnerChat />
             </Card>
             <Col span={24} style={{ height: "2vh" }}></Col>
             <Card
@@ -52,18 +53,6 @@ function App() {
           </Col>
         </Row>
       </Card>
-      {/* <div className="generate-chat-container">
-        <div></div>
-        <Button
-          shape="round"
-          loading={loadingStatus}
-          type="primary"
-          onClick={enterLoading}
-          style={{ height: "100%", fontSize: "30px" }}
-        >
-          Generate New Chat!
-        </Button>
-      </div> */}
     </div>
   );
 }
