@@ -17,31 +17,37 @@ function App() {
       <Card
         title="Secure Messaging Application"
         style={{
-          margin: "15vh 15vw",
+          margin: "10vh 15vw",
           width: "70vw",
           background: "#138585",
           borderColor: "#138585",
         }}
       >
         <Row gutter={16}>
-          <Col span={12}>
-            <Card title="Your Chat Sessions" bordered={false}>
-              asdasdads
-            </Card>
-          </Col>
-          <Col span={12}>
-            <Card title="Guest Chat Sessions" bordered={false}>
-              Card content
-            </Card>
-          </Col>
-          <Col span={24} style={{ height: "40px" }}></Col>
-          <Col span={24}>
+          <Col span={10}>
             <Card
-              title="Insert dynamic chat title here?"
-              style={{ height: "40vh" }}
+              title="Your Chat Sessions"
+              style={{ height: "30vh" }}
               bordered={false}
             >
-              display chat here
+              asdasdads
+            </Card>
+            <Col span={24} style={{ height: "2vh" }}></Col>
+            <Card
+              title="Guest Chat Sessions"
+              style={{ height: "30vh" }}
+              bordered={false}
+            >
+              asd
+            </Card>
+          </Col>
+          <Col span={14}>
+            <Card
+              title="Insert dynamic chat title here?"
+              style={{ height: "62vh" }}
+              bordered={false}
+            >
+              Card content
             </Card>
           </Col>
         </Row>
