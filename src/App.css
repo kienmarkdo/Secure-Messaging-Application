@@ -5,12 +5,20 @@ body {
 }
 
 html { 
-  background: url("../hd-background.jpg") no-repeat center center fixed; 
+ /*background: url("../hd-background.jpg") no-repeat center center fixed;*/
+ /* background: url("../hd-background.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover;*/
+  background-color: "#e5e5f7";
+  opacity: 0.8;
+  background-image:  radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0,10px 10px;
 }
+
+
 
 .generate-chat-container {
   display: flex;

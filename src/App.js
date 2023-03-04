@@ -13,7 +13,7 @@ function App() {
         style={{
           margin: "8vh 15vw",
           width: "70vw",
-          background: "#2b1611",
+          background: "#808080",
           borderColor: "",
         }}
       >
