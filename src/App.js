@@ -2,6 +2,7 @@ import "./App.css";
 import { Typography, Button, Input, Card, Row, Col } from "antd";
 import { useState } from "react";
 import OwnerChat from "./components/OwnerChat";
+import GuestChat from "./components/GuestChat";
 
 function App() {
   const [loadingStatus, setLoadingStatus] = useState(false);
@@ -26,21 +27,21 @@ function App() {
       >
         <Row gutter={16}>
           <Col span={10}>
-            <Card
+            {/* <Card
               title="Your Chat Sessions"
               style={{ height: "30vh" }}
               bordered={false}
-            >
-              <OwnerChat />
-            </Card>
+            ></Card> */}
+            <OwnerChat />
             <Col span={24} style={{ height: "2vh" }}></Col>
-            <Card
+            {/* <Card
               title="Guest Chat Sessions"
               style={{ height: "30vh" }}
               bordered={false}
             >
               asd
-            </Card>
+            </Card> */}
+            <GuestChat />
           </Col>
           <Col span={14}>
             <Card
