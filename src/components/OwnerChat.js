@@ -41,6 +41,13 @@ export default function OwnerChat() {
   }, []);
   return (
     <>
+      {
+        //owner chat header
+      <div style={{ backgroundColor: "white", textAlign: "center" }}>
+        <strong>Your Chat Session</strong>
+      </div>
+      }
+
       <div
         id="scrollableDiv"
         style={{
@@ -67,11 +74,11 @@ export default function OwnerChat() {
           scrollableTarget="scrollableDiv"
         >
           <List
-            header={
+            /*header={
               <div style={{ backgroundColor: "white" }}>
                 <strong>Your Chat Session</strong>
               </div>
-            }
+            }*/
             dataSource={data}
             renderItem={(item) => (
               <List.Item key={item.email}>
