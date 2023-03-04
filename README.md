@@ -14,6 +14,6 @@ This application implements a custom encryption algorithm for encrypting and dec
 
 ## To run
 
-`git clone https://github.com/kienmarkdo/Secure-Messaging-Application.git` to clone the project to your directory
-`npm install` to install all dependencies
-`npm run start` to start application in browser
+- `git clone https://github.com/kienmarkdo/Secure-Messaging-Application.git` to clone the project to your directory
+- `npm install` to install all dependencies
+- `npm run start` to start application in browser
