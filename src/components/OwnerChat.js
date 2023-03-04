@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Divider, List, Skeleton, Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { db } from "../FirebaseConnect";
+import { ref, push, set } from "firebase/database";
 
 export default function OwnerChat() {
   const [btnLoading, setBtnLoading] = useState(false);
 
-  const enterLoading = () => {
+  const handleNewChatRoom = () => {
     setBtnLoading(true);
-
+    const sessionsListRef = ref(db, "sessions/");
+    const newSessionRef = push(sessionsListRef);
+    set(newSessionRef, {
+      encryptedMessages: [""],
+    });
     setTimeout(() => setBtnLoading(false), 2000);
   };
 
@@ -78,7 +84,7 @@ export default function OwnerChat() {
                   shape="round"
                   loading={btnLoading}
                   danger="true"
-                  onClick={enterLoading}
+                  onClick={handleNewChatRoom}
                   //   style={{ height: "100%", fontSize: "30px" }}
                 >
                   Delete
@@ -89,7 +95,7 @@ export default function OwnerChat() {
                   shape="round"
                   loading={btnLoading}
                   type="primary"
-                  onClick={enterLoading}
+                  onClick={handleNewChatRoom}
                   //   style={{ height: "100%", fontSize: "30px" }}
                 >
                   Open
@@ -103,7 +109,7 @@ export default function OwnerChat() {
         shape="round"
         loading={btnLoading}
         type="primary"
-        onClick={enterLoading}
+        onClick={handleNewChatRoom}
         block="true"
         style={{ marginTop: "20px", background: "#4BB543", border: "none" }}
       >
