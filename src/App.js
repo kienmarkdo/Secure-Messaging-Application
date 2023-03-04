@@ -1,28 +1,20 @@
 import "./App.css";
-import { Typography, Button, Input, Card, Row, Col } from "antd";
+import { Card, Row, Col } from "antd";
 import { useState } from "react";
 import OwnerChat from "./components/OwnerChat";
 import GuestChat from "./components/GuestChat";
 
 function App() {
-  const [loadingStatus, setLoadingStatus] = useState(false);
-
-  const enterLoading = () => {
-    setLoadingStatus(true);
-
-    setTimeout(() => setLoadingStatus(false), 2000);
-  };
-
   return (
     <div>
       {/* <div className="main-container"></div> */}
       <Card
         title={<h2 style={{ color: "white" }}>Secure Messaging Application</h2>}
         style={{
-          margin: "10vh 15vw",
+          margin: "8vh 15vw",
           width: "70vw",
-          background: "#138585",
-          borderColor: "#138585",
+          background: "#2b1611",
+          borderColor: "",
         }}
       >
         <Row gutter={16}>

@@ -105,7 +105,7 @@ export default function OwnerChat() {
         type="primary"
         onClick={enterLoading}
         block="true"
-        style={{ marginTop: "10px", background: "#4BB543", border: "none" }}
+        style={{ marginTop: "20px", background: "#4BB543", border: "none" }}
       >
         Create New Chat Session
       </Button>

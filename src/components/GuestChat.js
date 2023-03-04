@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, List, Skeleton, Button } from "antd";
+import { Input, List, Skeleton, Button, Row, Col } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const { Search } = Input;
@@ -104,13 +104,25 @@ export default function GuestChat() {
         </InfiniteScroll>
       </div>
 
-      <Search
-        placeholder="Search Chat Session ID"
-        onSearch={onSearch}
-        enterButton
-        size="large"
-        style={{ marginTop: "10px", background: "#4BB543" }}
-      />
+      <Input.Group compact style={{ marginTop: "20px" }}>
+        <Input
+          style={{
+            width: "calc((100% - 88.81px) / 2)",
+          }}
+          defaultValue=""
+          placeholder="Chat Session ID"
+          //   size="large"
+        />
+        <Input
+          style={{
+            width: "calc((100% - 88.81px) / 2)",
+          }}
+          defaultValue=""
+          placeholder="Your Name"
+          //   size="large"
+        />
+        <Button type="primary">Join Chat</Button>
+      </Input.Group>
     </>
   );
 }
