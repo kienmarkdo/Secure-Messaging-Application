@@ -2,18 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Divider, List, Skeleton, Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { db } from "../FirebaseConnect";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, onValue } from "firebase/database";
+import { Alert, message } from "antd";
+
+// Placeholder
+function encrypt(sessionId, encryptionKey) {
+  return sessionId + encryptionKey;
+}
 
 export default function OwnerChat() {
   const [btnLoading, setBtnLoading] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const dbRef = ref(db, "/sessions");
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'This is a success message',
+    });
+  };
+
+  onValue(
+    dbRef,
+    (snapshot) => {
+      success()
+      console.log("snapshotting");
+    },
+    {
+      onlyOnce: true,
+    }
+  );
 
   const handleNewChatRoom = () => {
     setBtnLoading(true);
-    const sessionsListRef = ref(db, "sessions/");
-    const newSessionRef = push(sessionsListRef);
-    set(newSessionRef, {
+    // call session id function
+    const sessionId = "something32";
+    // ping for encryption key
+    const encryptionKey = "ETIANMSURWDKGO";
+
+    const encryptedSessionId = encrypt(sessionId, encryptionKey);
+
+    set(ref(db, "sessions/" + encryptedSessionId), {
       encryptedMessages: [""],
     });
+
     setTimeout(() => setBtnLoading(false), 2000);
   };
 
@@ -36,18 +70,21 @@ export default function OwnerChat() {
         setLoading(false);
       });
   };
+
   useEffect(() => {
     loadMoreData();
   }, []);
+
   return (
     <>
       {
         //owner chat header
-      <div style={{ backgroundColor: "white", textAlign: "center" }}>
-        <strong>Your Chat Session</strong>
-      </div>
+        <div style={{ backgroundColor: "white", textAlign: "center" }}>
+          <strong>Your Chat Session</strong>
+        </div>
       }
 
+      {alert && <Alert message="Success Text" type="success" />}
       <div
         id="scrollableDiv"
         style={{

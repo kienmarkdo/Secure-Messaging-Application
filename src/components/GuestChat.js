@@ -1,13 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { Input, List, Skeleton, Button, Row, Col } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { db } from "../FirebaseConnect";
+import { ref, push, set } from "firebase/database";
 
 const { Search } = Input;
 
 const onSearch = (value) => console.log(value);
 
+const encrypt = (value1, value2) => {
+  return value1 + value2;
+};
+
 export default function GuestChat() {
   const [btnLoading, setBtnLoading] = useState(false);
+  const [chatSessionId, setChatSessionId] = useState("");
+
+  const handleJoinChat = () => {
+    const currentSessionValue = chatSessionId;
+    if (chatSessionId.length <= 0) {
+        console.log("Enter chat session id >:(")
+        return
+    }
+
+    console.log("handle join chat")
+
+    const guestKeypass = "guest_keypass"; 
+    const encryptionKey = "somebullshit";
+
+    const encryptedKeyPass = encrypt(guestKeypass, encryptionKey);
+
+    const postListRef = ref(db, "requests/");
+    const newPostRef = push(postListRef);
+    set(newPostRef, {
+      requestedSessionId: currentSessionValue,
+      encryptedKeyPass: encryptedKeyPass,
+    });
+
+    // set(ref(db, "requests/"), {
+    //   requestedSessionId: currentSessionValue,
+    //   encryptedKeyPass: encryptedKeyPass
+    // });
+  };
 
   const enterLoading = () => {
     setBtnLoading(true);
@@ -41,10 +75,9 @@ export default function GuestChat() {
     <>
       {
         //guest chat header
-      <div style={{ backgroundColor: "white",textAlign: "center"}}>
-        <strong>Guest Chat Session</strong>
-    
-      </div>
+        <div style={{ backgroundColor: "white", textAlign: "center" }}>
+          <strong>Guest Chat Session</strong>
+        </div>
       }
       <div
         id="scrollableDiv"
@@ -117,11 +150,14 @@ export default function GuestChat() {
             width: "calc((100% - 88.81px))",
           }}
           defaultValue=""
+          value={chatSessionId}
+          onChange={(e) => setChatSessionId(e.target.value)}
           placeholder="Chat Session ID"
-          //   size="large"
         />
-     
-        <Button type="primary">Join Chat</Button>
+
+        <Button type="primary" onClick={() => handleJoinChat()}>
+          Join Chat
+        </Button>
       </Input.Group>
     </>
   );
