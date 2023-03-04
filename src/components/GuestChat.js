@@ -107,20 +107,13 @@ export default function GuestChat() {
       <Input.Group compact style={{ marginTop: "20px" }}>
         <Input
           style={{
-            width: "calc((100% - 88.81px) / 2)",
+            width: "calc((100% - 88.81px))",
           }}
           defaultValue=""
           placeholder="Chat Session ID"
           //   size="large"
         />
-        <Input
-          style={{
-            width: "calc((100% - 88.81px) / 2)",
-          }}
-          defaultValue=""
-          placeholder="Your Name"
-          //   size="large"
-        />
+     
         <Button type="primary">Join Chat</Button>
       </Input.Group>
     </>
