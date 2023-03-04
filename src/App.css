@@ -1,0 +1,12 @@
+body {
+  background: #2b1d11;
+}
+
+.generate-chat-container {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  /* align-items: center; */
+  margin: 50vh;
+  flex-direction: column;
+}
