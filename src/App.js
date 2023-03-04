@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, Input, Card } from "antd";
+import { Typography, Button, Input, Card, Row, Col } from "antd";
 import { useState } from "react";
 
 function App() {
@@ -14,17 +14,38 @@ function App() {
   return (
     <div>
       {/* <div className="main-container"></div> */}
-      {/* <Card title="Card Title">
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-        <Card.Grid hoverable={false} style={gridStyle}>
-          Content
-        </Card.Grid>
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-        <Card.Grid style={gridStyle}>Content</Card.Grid>
-      </Card> */}
+      <Card
+        title="Secure Messaging Application"
+        style={{
+          margin: "15vh 15vw",
+          width: "70vw",
+          background: "#138585",
+          borderColor: "#138585",
+        }}
+      >
+        <Row gutter={16}>
+          <Col span={12}>
+            <Card title="Your Chat Sessions" bordered={false}>
+              asdasdads
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card title="Guest Chat Sessions" bordered={false}>
+              Card content
+            </Card>
+          </Col>
+          <Col span={24} style={{ height: "40px" }}></Col>
+          <Col span={24}>
+            <Card
+              title="Insert dynamic chat title here?"
+              style={{ height: "40vh" }}
+              bordered={false}
+            >
+              display chat here
+            </Card>
+          </Col>
+        </Row>
+      </Card>
       {/* <div className="generate-chat-container">
         <div></div>
         <Button
