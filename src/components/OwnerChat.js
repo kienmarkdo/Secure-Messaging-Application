@@ -38,7 +38,7 @@ export default function OwnerChat() {
       <div
         id="scrollableDiv"
         style={{
-          height: "30vh",
+          height: "25vh",
           overflow: "auto",
           padding: "0 16px",
           border: "1px solid rgba(140, 140, 140, 0.35)",
@@ -58,12 +58,11 @@ export default function OwnerChat() {
               active
             />
           }
-          endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
           scrollableTarget="scrollableDiv"
         >
           <List
             header={
-              <div style={{ position: "fixed", backgroundColor: "white" }}>
+              <div style={{ backgroundColor: "white" }}>
                 <strong>Your Chat Session</strong>
               </div>
             }
@@ -78,7 +77,18 @@ export default function OwnerChat() {
                   //   key={item.email}
                   shape="round"
                   loading={btnLoading}
-                  type="default"
+                  danger="true"
+                  onClick={enterLoading}
+                  //   style={{ height: "100%", fontSize: "30px" }}
+                >
+                  Delete
+                </Button>
+                <div style={{ width: "5px" }}></div>
+                <Button
+                  //   key={item.email}
+                  shape="round"
+                  loading={btnLoading}
+                  type="primary"
                   onClick={enterLoading}
                   //   style={{ height: "100%", fontSize: "30px" }}
                 >
@@ -89,6 +99,16 @@ export default function OwnerChat() {
           />
         </InfiniteScroll>
       </div>
+      <Button
+        shape="round"
+        loading={btnLoading}
+        type="primary"
+        onClick={enterLoading}
+        block="true"
+        style={{ marginTop: "10px", background: "#4BB543", border: "none" }}
+      >
+        Create New Chat Session
+      </Button>
     </>
   );
 }

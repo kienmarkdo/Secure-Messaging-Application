@@ -17,7 +17,7 @@ function App() {
     <div>
       {/* <div className="main-container"></div> */}
       <Card
-        title="Secure Messaging Application"
+        title={<h2 style={{ color: "white" }}>Secure Messaging Application</h2>}
         style={{
           margin: "10vh 15vw",
           width: "70vw",
@@ -27,20 +27,8 @@ function App() {
       >
         <Row gutter={16}>
           <Col span={10}>
-            {/* <Card
-              title="Your Chat Sessions"
-              style={{ height: "30vh" }}
-              bordered={false}
-            ></Card> */}
             <OwnerChat />
             <Col span={24} style={{ height: "2vh" }}></Col>
-            {/* <Card
-              title="Guest Chat Sessions"
-              style={{ height: "30vh" }}
-              bordered={false}
-            >
-              asd
-            </Card> */}
             <GuestChat />
           </Col>
           <Col span={14}>

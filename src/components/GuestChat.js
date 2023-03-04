@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Divider, List, Skeleton, Button } from "antd";
+import { Input, List, Skeleton, Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
+
+const { Search } = Input;
+
+const onSearch = (value) => console.log(value);
 
 export default function GuestChat() {
   const [btnLoading, setBtnLoading] = useState(false);
@@ -38,7 +42,7 @@ export default function GuestChat() {
       <div
         id="scrollableDiv"
         style={{
-          height: "30vh",
+          height: "25vh",
           overflow: "auto",
           padding: "0 16px",
           border: "1px solid rgba(140, 140, 140, 0.35)",
@@ -58,12 +62,11 @@ export default function GuestChat() {
               active
             />
           }
-          endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
           scrollableTarget="scrollableDiv"
         >
           <List
             header={
-              <div>
+              <div style={{ backgroundColor: "white" }}>
                 <strong>Guest Chat Session</strong>
               </div>
             }
@@ -78,7 +81,18 @@ export default function GuestChat() {
                   //   key={item.email}
                   shape="round"
                   loading={btnLoading}
-                  type="default"
+                  danger="true"
+                  onClick={enterLoading}
+                  //   style={{ height: "100%", fontSize: "30px" }}
+                >
+                  Delete
+                </Button>
+                <div style={{ width: "5px" }}></div>
+                <Button
+                  //   key={item.email}
+                  shape="round"
+                  loading={btnLoading}
+                  type="primary"
                   onClick={enterLoading}
                   //   style={{ height: "100%", fontSize: "30px" }}
                 >
@@ -89,6 +103,14 @@ export default function GuestChat() {
           />
         </InfiniteScroll>
       </div>
+
+      <Search
+        placeholder="Search Chat Session ID"
+        onSearch={onSearch}
+        enterButton
+        size="large"
+        style={{ marginTop: "10px", background: "#4BB543" }}
+      />
     </>
   );
 }
