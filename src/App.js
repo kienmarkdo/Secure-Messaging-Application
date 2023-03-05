@@ -1,13 +1,26 @@
 import "./App.css";
 import { Card, Row, Col } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OwnerChat from "./components/OwnerChat";
 import GuestChat from "./components/GuestChat";
+import ChatColumn from "./components/ChatColumn";
 
 function App() {
+  const [sessionId, setSessionId] = useState(null);
+
+  useEffect(() => {
+    console.log(sessionId);
+  }, [sessionId]);
+
+  const updateSessionId = (key) => {
+    console.log("keyL : ", key);
+    setSessionId(key);
+  };
+
   return (
     <div>
       {/* <div className="main-container"></div> */}
+      {/* <button onClick={() => updateSessionId("hello")}>ur mum</button> */}
       <Card
         title={<h2 style={{ color: "white" }}>Secure Messaging Application</h2>}
         style={{
@@ -21,16 +34,10 @@ function App() {
           <Col span={10}>
             <OwnerChat />
             <Col span={24} style={{ height: "2vh" }}></Col>
-            <GuestChat />
+            <GuestChat handleSessionId={updateSessionId} />
           </Col>
           <Col span={14}>
-            <Card
-              title="Insert dynamic chat title here?"
-              style={{ height: "62vh" }}
-              bordered={false}
-            >
-              Card content
-            </Card>
+            <ChatColumn />
           </Col>
         </Row>
       </Card>

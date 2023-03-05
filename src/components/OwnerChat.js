@@ -15,21 +15,12 @@ function decrypt(key) {
   return key;
 }
 
-export default function OwnerChat() {
+function OwnerChat({ handleSessionId }) {
   const [btnLoading, setBtnLoading] = useState(false);
   const [alert, setAlert] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
   const [chatroomIds, setChatroomIds] = useState([]);
 
   const dbRef = ref(db, "/sessions");
-
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "This is a success message",
-      duration: 10,
-    });
-  };
 
   const handleNewChatRoom = () => {
     setBtnLoading(true);
@@ -53,23 +44,7 @@ export default function OwnerChat() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
-  const loadMoreData = () => {
-    // if (loading) {
-    //   return;
-    // }
-    // setLoading(true);
-    // fetch(
-    //   "https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo"
-    // )
-    //   .then((res) => res.json())
-    //   .then((body) => {
-    //     setData([...data, ...body.results]);
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
-  };
+  const loadMoreData = () => {};
 
   onValue(
     dbRef,
@@ -124,6 +99,11 @@ export default function OwnerChat() {
     // loadMoreData();
     console.log("data: ", data);
   }, [data]);
+
+  const setShit = (key) => {
+    console.log("shit key; ", key);
+    handleSessionId(key);
+  };
 
   return (
     <>
@@ -182,7 +162,7 @@ export default function OwnerChat() {
                   shape="round"
                   loading={btnLoading}
                   type="primary"
-                  onClick={handleNewChatRoom}
+                  onClick={() => setShit(item["session"])}
                 >
                   Open
                 </Button>
@@ -193,7 +173,7 @@ export default function OwnerChat() {
       </div>
       <Button
         shape="round"
-        loading={btnLoading}
+        // loading={btnLoading}
         type="primary"
         onClick={handleNewChatRoom}
         block="true"
@@ -204,3 +184,5 @@ export default function OwnerChat() {
     </>
   );
 }
+
+export default OwnerChat;
