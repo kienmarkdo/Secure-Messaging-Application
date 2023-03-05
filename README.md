@@ -20,5 +20,5 @@ This application implements a custom encryption algorithm for encrypting and dec
 
 ## Demo
 
-![image](https://user-images.githubusercontent.com/67518620/222940724-4e0effa7-0b31-4fec-b6f2-c27f5c2fbb87.png)
+![image](https://user-images.githubusercontent.com/67518620/222941171-4ef147bb-9f58-436c-886f-eecc5320ea1a.png)
 
