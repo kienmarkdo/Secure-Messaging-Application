@@ -9,7 +9,7 @@ function App() {
   const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
-    console.log(sessionId);
+    console.log("useffect: ", sessionId);
   }, [sessionId]);
 
   const updateSessionId = (key) => {
@@ -32,12 +32,14 @@ function App() {
       >
         <Row gutter={16}>
           <Col span={10}>
-            <OwnerChat />
+            <OwnerChat handleSessionId={updateSessionId} />
             <Col span={24} style={{ height: "2vh" }}></Col>
-            <GuestChat handleSessionId={updateSessionId} />
+            <GuestChat />
           </Col>
           <Col span={14}>
-            <ChatColumn />
+            <ChatColumn
+              sessionId={sessionId}
+            />
           </Col>
         </Row>
       </Card>
