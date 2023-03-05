@@ -12,11 +12,13 @@ This application also considers the following security vulnerabilities and attem
 
 This application implements a custom encryption algorithm for encrypting and decrypting data packets.
 
+<!--
 ## To run
 
 - `git clone https://github.com/kienmarkdo/Secure-Messaging-Application.git` to clone the project to your directory
 - `npm install` to install all dependencies
 - `npm run start` to start application in browser
+-->
 
 ## Demo
 
