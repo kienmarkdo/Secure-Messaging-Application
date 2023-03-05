@@ -2,43 +2,39 @@ import React, { useEffect, useState } from "react";
 import { Avatar, Divider, List, Skeleton, Button } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { db } from "../FirebaseConnect";
-import { ref, push, set, onValue } from "firebase/database";
+import { ref, push, set, onValue, child } from "firebase/database";
 import { Alert, message } from "antd";
+import { v4 as uuidv4 } from "uuid";
 
 // Placeholder
 function encrypt(sessionId, encryptionKey) {
   return sessionId + encryptionKey;
 }
 
+function decrypt(key) {
+  return key;
+}
+
 export default function OwnerChat() {
   const [btnLoading, setBtnLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [chatroomIds, setChatroomIds] = useState([]);
 
   const dbRef = ref(db, "/sessions");
 
   const success = () => {
     messageApi.open({
-      type: 'success',
-      content: 'This is a success message',
+      type: "success",
+      content: "This is a success message",
+      duration: 10,
     });
   };
-
-  onValue(
-    dbRef,
-    (snapshot) => {
-      success()
-      console.log("snapshotting");
-    },
-    {
-      onlyOnce: true,
-    }
-  );
 
   const handleNewChatRoom = () => {
     setBtnLoading(true);
     // call session id function
-    const sessionId = "something32";
+    const sessionId = uuidv4();
     // ping for encryption key
     const encryptionKey = "ETIANMSURWDKGO";
 
@@ -46,34 +42,88 @@ export default function OwnerChat() {
 
     set(ref(db, "sessions/" + encryptedSessionId), {
       encryptedMessages: [""],
-    });
+    }).catch(alert);
+
+    setChatroomIds([...chatroomIds, encryptedSessionId]);
+    console.log("chatroomIds3: ", chatroomIds);
 
     setTimeout(() => setBtnLoading(false), 2000);
   };
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+
   const loadMoreData = () => {
-    if (loading) {
-      return;
-    }
-    setLoading(true);
-    fetch(
-      "https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo"
-    )
-      .then((res) => res.json())
-      .then((body) => {
-        setData([...data, ...body.results]);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    // if (loading) {
+    //   return;
+    // }
+    // setLoading(true);
+    // fetch(
+    //   "https://randomuser.me/api/?results=10&inc=name,gender,email,nat,picture&noinfo"
+    // )
+    //   .then((res) => res.json())
+    //   .then((body) => {
+    //     setData([...data, ...body.results]);
+    //     setLoading(false);
+    //   })
+    //   .catch(() => {
+    //     setLoading(false);
+    //   });
   };
 
+  onValue(
+    dbRef,
+    (childSnapshot) => {
+      const childKey = childSnapshot.key;
+      console.log("childKey: ", childKey);
+      const childData = childSnapshot.val();
+      console.log("childData: ", childData);
+      const temp = data;
+      //   if (loading) {
+      //     return;
+      //   }
+      setLoading(true);
+
+      console.log("object keys bullshit");
+
+      Object.keys(childData).forEach(function (key) {
+        console.log("chatroomIds: ", chatroomIds);
+        console.log("key: ", key);
+        let g = chatroomIds;
+        if (g.includes(key)) {
+          console.log("entering....");
+          const decrypt_key = decrypt(key);
+          const messages = [];
+
+          childData[key]["encryptedMessages"].map((value) => {
+            console.log("message: ", value);
+            let a = decrypt(value);
+            messages.push(a);
+          });
+
+          let b = {};
+          b["session"] = decrypt_key;
+          b["messages"] = messages;
+
+          console.log("adding b: ", b);
+          if (!temp.includes(b)) {
+            temp.push(b);
+          }
+        }
+      });
+
+      setLoading(true);
+      setData(temp);
+    },
+    {
+      onlyOnce: true,
+    }
+  );
+
   useEffect(() => {
-    loadMoreData();
-  }, []);
+    // loadMoreData();
+    console.log("data: ", data);
+  }, [data]);
 
   return (
     <>
@@ -84,7 +134,6 @@ export default function OwnerChat() {
         </div>
       }
 
-      {alert && <Alert message="Success Text" type="success" />}
       <div
         id="scrollableDiv"
         style={{
@@ -117,30 +166,23 @@ export default function OwnerChat() {
               </div>
             }*/
             dataSource={data}
-            renderItem={(item) => (
-              <List.Item key={item.email}>
-                <List.Item.Meta
-                  //   title={<a href="https://ant.design">{item.name.last}</a>}
-                  description={item.email}
-                />
+            renderItem={(item, index) => (
+              <List.Item key={index}>
+                <List.Item.Meta description={item["session"]} />
                 <Button
-                  //   key={item.email}
                   shape="round"
                   loading={btnLoading}
                   danger="true"
                   onClick={handleNewChatRoom}
-                  //   style={{ height: "100%", fontSize: "30px" }}
                 >
                   Delete
                 </Button>
                 <div style={{ width: "5px" }}></div>
                 <Button
-                  //   key={item.email}
                   shape="round"
                   loading={btnLoading}
                   type="primary"
                   onClick={handleNewChatRoom}
-                  //   style={{ height: "100%", fontSize: "30px" }}
                 >
                   Open
                 </Button>
